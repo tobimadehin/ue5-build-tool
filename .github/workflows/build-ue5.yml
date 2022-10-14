@@ -12,9 +12,11 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - name: Clone UE5 latest stable version
+    - name: Checkout
       uses: actions/checkout@v3
-    - name: Git Clone Action
+    - name: Setup Node.js environment
+      uses: actions/setup-node@v3.5.1
+    - name: Git Clone UE5 release branch
       uses: sudosubin/git-clone-action@v1.0.1
       with:
         repository: EpicGames/UnrealEngine -b release
