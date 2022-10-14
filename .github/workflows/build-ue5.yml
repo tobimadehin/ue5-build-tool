@@ -18,7 +18,7 @@ jobs:
       uses: actions/checkout@v3
       with:
         repository: EpicGames/UnrealEngine
-        token: ${{ secrets.MY_PAT
+        token: ${{ secrets.MY_PAT }}
   
   list:
     name: Path lister
