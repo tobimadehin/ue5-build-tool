@@ -1,4 +1,4 @@
-name: C/C++ CI
+name: Unreal Engine 5.3 stable release builder
 
 on:
   push:
@@ -19,6 +19,7 @@ jobs:
     - name: Git Clone UE5 release branch
       uses: sudosubin/git-clone-action@v1.0.1
       with:
+        token: ${{ secrets.ACCESS_TOKEN }}
         repository: EpicGames/UnrealEngine -b release
         ref: refs/heads/release
     - name: Package an executable file
