@@ -22,10 +22,8 @@ jobs:
    
     - name: Package an executable file
       run: |
-        df -h
         sudo rm -rf /usr/local/lib/android
         sudo rm -rf /usr/share/dotnet
-        df -h
-        # ./Setup.sh
-        # ./GenerateProjectFiles.sh
+        ./Setup.sh
+        ./GenerateProjectFiles.sh
         make
