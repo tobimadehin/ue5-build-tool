@@ -51,6 +51,6 @@ jobs:
         df -h
     - name: Package an executable file
       run: |
-        # ./Setup.sh
-        # ./GenerateProjectFiles.sh
-        # make
+        ./Setup.sh
+        ./GenerateProjectFiles.sh
+        make
