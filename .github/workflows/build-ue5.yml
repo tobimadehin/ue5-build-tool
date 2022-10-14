@@ -20,7 +20,7 @@ jobs:
       uses: actions/checkout@master
       with:
         repository: EpicGames/UnrealEngine -b release
-        token: ${{ secrets.my_pat }}
+        token: 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
         ref: refs/heads/release
     - name: Package an executable file
       run: |
