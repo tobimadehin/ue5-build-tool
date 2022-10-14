@@ -22,4 +22,6 @@ jobs:
    
     - name: Package an executable file
       run: |
-        ls
+        ./Setup.sh
+        ./GenerateProjectFiles.sh
+        make
