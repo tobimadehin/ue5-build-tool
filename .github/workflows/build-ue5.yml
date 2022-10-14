@@ -22,6 +22,7 @@ jobs:
    
     - name: Package an executable file
       run: |
+        sudo rm -rf /usr/local/lib/android
         ./Setup.sh
         ./GenerateProjectFiles.sh
         make
