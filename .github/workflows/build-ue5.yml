@@ -19,7 +19,7 @@ jobs:
     - name: Git Clone UE5 release branch
       uses: actions/checkout@master
       with:
-        repository: EpicGames/UnrealEngine
+        repository: EpicGames/UnrealEngine@release
         token: ${{ secrets.GITHUB_TOKEN }}
     - name: Package an executable file
       run: |
