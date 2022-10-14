@@ -22,6 +22,6 @@ jobs:
     - name: Package an executable file
       run: |
         cd UnrealEngine
-        Setup.sh
-        GenerateProjectFiles.sh
+        ./Setup.sh
+        ./GenerateProjectFiles.sh
         make
