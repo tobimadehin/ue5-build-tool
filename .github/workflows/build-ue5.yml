@@ -22,8 +22,12 @@ jobs:
    
     - name: Package an executable file
       run: |
-        sudo rm -rf /usr/local/lib/android
-        sudo rm -rf /usr/share/dotnet
-        ./Setup.sh
-        ./GenerateProjectFiles.sh
-        make
+        df -h
+        sudo rm -rf "/usr/local/lib/android"
+        sudo rm -rf "/usr/share/dotnet"
+        sudo rm -rf "/usr/local/share/boost"
+        sudo rm -rf "$AGENT_TOOLSDIRECTORY"
+        df -h
+        # ./Setup.sh
+        # ./GenerateProjectFiles.sh
+        # make
