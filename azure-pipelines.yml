@@ -21,7 +21,7 @@ steps:
   - script:  docker pull $(ghcr.io/epicgames/unreal-engine:dev-slim-5.0.3)
     workingDirectory: $(Build.SourcesDirectory)/app/Dockerfile
     displayName: 'Docker Pull'
-    condition: ne(variables.CACHE_RESTORED, 'true')
+    condition: ne(variables.CACHE_RESTORED, 'false')
 
   - script: |
       cat /usr/local/share/ueinstalled && exit
