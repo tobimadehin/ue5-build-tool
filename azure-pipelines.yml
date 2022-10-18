@@ -4,7 +4,7 @@ variables:
   tag: '$(Build.BuildId)'
 
 pool:
-  vmImage: ghcr.io/epicgames/unreal-engine:dev-slim-5.0.3
+  vmImage: ubuntu-latest
 steps:
   - task: Cache@2
     displayName: Cache task
@@ -17,6 +17,13 @@ steps:
       docker load -i $(Pipeline.Workspace)/docker/cache.tar
     displayName: Docker restore
     condition: and(not(canceled()), eq(variables.CACHE_RESTORED, 'true'))
+
+  - script: |
+      cat /usr/local/share/ueinstalled && exit(0)
+      docker run --rm -d --name ue5 "ghcr.io/epicgames/unreal-engine:dev-slim-5.0.3" bash -c "sleep infinity"
+      docker cp "ue5:/home/ue5/UnrealEngine" "/destination/path/on/host/filesystem"
+      docker stop ue5
+      echo "OK" > /usr/local/share/ueinstalled
 
   - task: Docker@2
     displayName: 'Build Docker'
