@@ -6,20 +6,8 @@ variables:
 pool:
   vmImage: ubuntu-latest
 steps:
-  - task: Cache@2
-    displayName: Cache task
-    inputs:
-      key: 'docker | "$(Agent.OS)" | cache'
-      #path: $(Pipeline.Workspace)/docker
-      path: $(Build.SourcesDirectory)/app/Dockerfile
-      cacheHitVar: CACHE_RESTORED
-    
-  - script: docker load -i $(Pipeline.Workspace)/docker/cache.tar
-    displayName: Docker restore
-    condition: and(not(canceled()), eq(variables.CACHE_RESTORED, 'true'))
 
-  - script:  docker pull $(ghcr.io/epicgames/unreal-engine:dev-slim-5.0.3)
-    workingDirectory: $(Build.SourcesDirectory)/app/Dockerfile
+  - script:  docker pull ghcr.io/epicgames/unreal-engine:dev-slim-5.0.3
     displayName: 'Docker Pull'
     #condition: ne(variables.CACHE_RESTORED, 'false')
 
