@@ -1,0 +1,34 @@
+variables:
+  repository: 'unrealSlim'
+  dockerfilePath: '$(Build.SourcesDirectory)/app/Dockerfile'
+  tag: '$(Build.BuildId)'
+
+pool:
+  vmImage: ghcr.io/epicgames/unreal-engine:dev-slim-5.0.3
+steps:
+  - task: Cache@2
+    displayName: Cache task
+    inputs:
+      key: 'docker | "$(Agent.OS)" | cache'
+      path: $(Pipeline.Workspace)/docker
+      cacheHitVar: CACHE_RESTORED
+    
+  - script: |
+      docker load -i $(Pipeline.Workspace)/docker/cache.tar
+    displayName: Docker restore
+    condition: and(not(canceled()), eq(variables.CACHE_RESTORED, 'true'))
+
+  - task: Docker@2
+    displayName: 'Build Docker'
+    inputs:
+      command: 'build'
+      repository: '$(repository)'
+      dockerfile: '$(dockerfilePath)'
+      tags: |
+        '$(tag)'
+
+  - script: |
+      mkdir -p $(Pipeline.Workspace)/docker
+      docker save -o $(Pipeline.Workspace)/docker/cache.tar $(repository):$(tag)
+    displayName: Docker save
+    condition: and(not(canceled()), or(failed(), ne(variables.CACHE_RESTORED, 'true')))
